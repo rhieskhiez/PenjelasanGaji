@@ -57,6 +57,9 @@
             background: #f8f9fa;
             border-bottom: 1px solid #e9ecef;
             gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .nav-button {
@@ -427,6 +430,10 @@
                 margin-bottom: 10px;
             }
 
+            .navigation {
+                position: static;
+            }
+
             .calendar-body {
                 padding: 30px;
                 min-height: 500px;
@@ -479,6 +486,8 @@
                 this.monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
                                   'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
                 this.dayNames = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                this.isSwipeActive = false;
+                this.touchStartY = 0;
                 this.init();
                 this.addSwipeSupport();
             }
@@ -562,7 +571,6 @@
                         hasCompensation: true,
                         label: '20 Okt - 19 Nov 2025'
                     },
-
                     { 
                         type: 'period', 
                         startDate: new Date(2025, 10, 20), 
@@ -594,25 +602,45 @@
                 
                 calendarBody.addEventListener('touchstart', (e) => {
                     touchStartX = e.changedTouches[0].screenX;
+                    this.touchStartY = e.changedTouches[0].screenY;
+                    this.isSwipeActive = false;
+                }, { passive: true });
+                
+                calendarBody.addEventListener('touchmove', (e) => {
+                    const touchMoveX = e.changedTouches[0].screenX;
+                    const touchMoveY = e.changedTouches[0].screenY;
+                    
+                    const diffX = Math.abs(touchMoveX - touchStartX);
+                    const diffY = Math.abs(touchMoveY - this.touchStartY);
+                    
+                    // Only activate swipe if horizontal movement is greater than vertical
+                    if (diffX > diffY && diffX > 30) {
+                        this.isSwipeActive = true;
+                    }
                 }, { passive: true });
                 
                 calendarBody.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    this.handleSwipe();
-                }, { passive: true });
-                
-                this.handleSwipe = () => {
-                    const swipeThreshold = 50;
-                    const diff = touchStartX - touchEndX;
+                    if (!this.isSwipeActive) return;
                     
-                    if (Math.abs(diff) > swipeThreshold) {
-                        if (diff > 0) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const touchEndY = e.changedTouches[0].screenY;
+                    
+                    const diffX = touchStartX - touchEndX;
+                    const diffY = Math.abs(this.touchStartY - touchEndY);
+                    
+                    // Only trigger swipe if horizontal movement is significantly greater than vertical
+                    if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY * 2) {
+                        if (diffX > 0) {
+                            // Swipe left - next
                             this.navigate(1);
                         } else {
+                            // Swipe right - previous
                             this.navigate(-1);
                         }
                     }
-                };
+                    
+                    this.isSwipeActive = false;
+                }, { passive: true });
             }
 
             getWeekdaysShort() {
@@ -755,13 +783,11 @@
                     html += `<div class="weekday-header ${isWeekendHeader ? 'weekend' : ''}">${day}</div>`;
                 });
                 
-                // Start from March 1st
                 const firstDay = startDate.getDay();
                 for (let i = 0; i < firstDay; i++) {
                     html += `<div class="calendar-day outside-period"></div>`;
                 }
                 
-                // Days 1-19
                 for (let day = 1; day <= 19; day++) {
                     const currentDate = new Date(2025, 2, day);
                     const isHoliday = this.isWeekend(currentDate.getDay());
@@ -855,13 +881,11 @@
                     html += `<div class="weekday-header ${isWeekendHeader ? 'weekend' : ''}">${day}</div>`;
                 });
                 
-                // Calculate starting position
                 const firstDay = startDate.getDay();
                 for (let i = 0; i < firstDay; i++) {
                     html += `<div class="calendar-day outside-period"></div>`;
                 }
                 
-                // Render only the period dates
                 let current = new Date(startDate);
                 let dayCount = 0;
                 
@@ -895,7 +919,6 @@
                     dayCount++;
                 }
                 
-                // Fill remaining cells
                 const totalCells = firstDay + dayCount;
                 const remainingCells = (7 - (totalCells % 7)) % 7;
                 for (let i = 0; i < remainingCells; i++) {
@@ -1031,7 +1054,8 @@
                 if (newIndex >= 0 && newIndex < this.views.length) {
                     this.currentViewIndex = newIndex;
                     this.render();
-                    window.scrollTo(0, 0);
+                    // Scroll to top of calendar container, not window
+                    document.querySelector('.calendar-container').scrollIntoView({ behavior: 'smooth' });
                 }
             }
         }
@@ -1041,15 +1065,6 @@
         
         document.addEventListener('DOMContentLoaded', () => {
             calendar = new PayrollCalendar();
-            
-            // Re-render on window resize
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    calendar.render();
-                }, 250);
-            });
         });
         
         function navigateCalendar(direction) {
