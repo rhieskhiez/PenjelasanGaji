@@ -1,4 +1,484 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><title>Kalender Pembayaran Gaji 2025-2026</title><style>* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; } body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 10px; } .calendar-container { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); max-width: 900px; width: 100%; margin: 0 auto; overflow: hidden; } .calendar-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 15px; text-align: center; } .calendar-title { font-size: 20px; font-weight: 600; margin-bottom: 5px; } .calendar-subtitle { font-size: 14px; opacity: 0.9; } .navigation { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-bottom: 1px solid #e9ecef; gap: 10px; position: sticky; top: 0; z-index: 100; } .nav-button { background: #667eea; color: white; border: none; padding: 12px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; gap: 5px; min-height: 44px; touch-action: manipulation; } .nav-button:active { transform: scale(0.95); background: #5a67d8; } .nav-button:disabled { background: #cbd5e0; cursor: not-allowed; opacity: 0.6; } .nav-button span:nth-child(2) { display: none; } .current-view { font-size: 14px; font-weight: 600; color: #2d3748; text-align: center; flex: 1; padding: 0 10px; } .calendar-body { padding: 15px; min-height: 400px; } .period-header { text-align: center; margin-bottom: 15px; padding: 12px; background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%); border-radius: 10px; } .period-title { font-size: 18px; font-weight: 700; color: #2d3748; margin-bottom: 3px; } .period-subtitle { font-size: 13px; color: #718096; } .payment-date-banner { background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); color: white; padding: 12px; border-radius: 10px; margin-bottom: 15px; text-align: center; font-weight: 600; font-size: 13px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); line-height: 1.4; } .payment-date-banner.special { background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%); } .work-schedule-notice { background: #f0fff4; border: 1px solid #9ae6b4; border-radius: 8px; padding: 10px; margin-bottom: 15px; text-align: center; color: #276749; font-size: 12px; line-height: 1.4; } .work-schedule-notice strong { color: #22543d; display: block; margin-bottom: 3px; } .period-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 15px; } .weekday-header { background: #f7fafc; padding: 8px 2px; text-align: center; font-weight: 600; color: #4a5568; font-size: 11px; border-radius: 5px; } .weekday-header.weekend { background: #fed7d7; color: #9b2c2c; } .calendar-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #e2e8f0; border-radius: 5px; font-size: 11px; background: white; position: relative; min-height: 40px; } .calendar-day .day-number { font-size: 14px; font-weight: 600; color: #2d3748; line-height: 1; } .calendar-day .day-month { font-size: 9px; color: #718096; margin-top: 2px; line-height: 1; } .calendar-day.payment-day { background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); color: white; border: 1px solid #2f855a; } .calendar-day.payment-day .day-number, .calendar-day.payment-day .day-month { color: white; } .calendar-day.period-start { border: 2px solid #4299e1; background: #ebf8ff; } .calendar-day.period-end { border: 2px solid #fc8181; background: #fff5f5; } .calendar-day.weekend { background: #fef2f2; } .calendar-day.weekend .day-number { color: #e53e3e; } .calendar-day.outside-period { opacity: 0.3; background: #fafafa; } .info-panel { background: #f7fafc; border-radius: 10px; padding: 15px; margin-top: 20px; border-left: 3px solid #667eea; } .info-title { font-size: 16px; font-weight: 600; color: #2d3748; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; } .info-item { padding: 8px 0; border-bottom: 1px solid #e2e8f0; color: #4a5568; display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.5; } .info-item:last-child { border-bottom: none; } .info-icon { width: 18px; height: 18px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; flex-shrink: 0; margin-top: 2px; } .legend { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; } .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #4a5568; } .legend-color { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #e2e8f0; flex-shrink: 0; } .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-top: 15px; } .stat-card { background: white; border-radius: 8px; padding: 12px; text-align: center; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); } .stat-value { font-size: 20px; font-weight: 700; color: #667eea; line-height: 1; } .stat-label { font-size: 11px; color: #718096; margin-top: 5px; line-height: 1.2; } .warning-box { background: #fef5e7; border: 1px solid #f6ad55; border-radius: 8px; padding: 12px; margin-top: 15px; color: #744210; font-size: 12px; line-height: 1.5; } /* Tablet and larger phones */ @media (min-width: 481px) { body { padding: 15px; } .calendar-header { padding: 25px 20px; } .calendar-title { font-size: 24px; } .navigation { padding: 20px; } .nav-button span:nth-child(2) { display: inline; } .current-view { font-size: 16px; } .calendar-body { padding: 20px; } .period-grid { gap: 3px; } .weekday-header { font-size: 12px; padding: 10px 4px; } .calendar-day { min-height: 50px; } .calendar-day .day-number { font-size: 16px; } .legend { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; } } /* Desktop */ @media (min-width: 768px) { body { padding: 20px; display: flex; justify-content: center; align-items: center; } .calendar-header { padding: 30px; } .calendar-title { font-size: 28px; margin-bottom: 10px; } .navigation { position: static; } .calendar-body { padding: 30px; min-height: 500px; } .period-grid { gap: 5px; } .weekday-header { font-size: 14px; padding: 12px; } .calendar-day .day-number { font-size: 18px; } }</style></head><body><div class="calendar-container"><div class="calendar-header"><h1 class="calendar-title">Kalender Penggajian</h1><p class="calendar-subtitle">Tahun 2025 - 2026</p></div><div class="navigation"><button class="nav-button" id="prevBtn" onclick="navigateCalendar(-1)"><span>←</span><span>Sebelumnya</span></button><div class="current-view" id="currentView">Januari 2025</div><button class="nav-button" id="nextBtn" onclick="navigateCalendar(1)"><span>Selanjutnya</span><span>→</span></button></div><div class="calendar-body" id="calendarBody"></div></div><script>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Kalender Pembayaran Gaji 2025-2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .calendar-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+        }
+
+        .calendar-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .calendar-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        .nav-button:active {
+            transform: scale(0.95);
+            background: #5a67d8;
+        }
+
+        .nav-button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .nav-button span:nth-child(2) {
+            display: none;
+        }
+
+        .current-view {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            text-align: center;
+            flex: 1;
+            padding: 0 10px;
+        }
+
+        .calendar-body {
+            padding: 15px;
+            min-height: 400px;
+        }
+
+        .period-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 10px;
+        }
+
+        .period-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 3px;
+        }
+
+        .period-subtitle {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        .payment-date-banner {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.4;
+        }
+
+        .payment-date-banner.special {
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+        }
+
+        .work-schedule-notice {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #276749;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .work-schedule-notice strong {
+            color: #22543d;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .period-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-bottom: 15px;
+        }
+
+        .weekday-header {
+            background: #f7fafc;
+            padding: 8px 2px;
+            text-align: center;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 11px;
+            border-radius: 5px;
+        }
+
+        .weekday-header.weekend {
+            background: #fed7d7;
+            color: #9b2c2c;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 11px;
+            background: white;
+            position: relative;
+            min-height: 40px;
+        }
+
+        .calendar-day .day-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            line-height: 1;
+        }
+
+        .calendar-day .day-month {
+            font-size: 9px;
+            color: #718096;
+            margin-top: 2px;
+            line-height: 1;
+        }
+
+        .calendar-day.payment-day {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: 1px solid #2f855a;
+        }
+
+        .calendar-day.payment-day .day-number,
+        .calendar-day.payment-day .day-month {
+            color: white;
+        }
+
+        .calendar-day.period-start {
+            border: 2px solid #4299e1;
+            background: #ebf8ff;
+        }
+
+        .calendar-day.period-end {
+            border: 2px solid #fc8181;
+            background: #fff5f5;
+        }
+
+        .calendar-day.weekend {
+            background: #fef2f2;
+        }
+
+        .calendar-day.weekend .day-number {
+            color: #e53e3e;
+        }
+
+        .calendar-day.outside-period {
+            opacity: 0.3;
+            background: #fafafa;
+        }
+
+        .info-panel {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 3px solid #667eea;
+        }
+
+        .info-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            width: 18px;
+            height: 18px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #4a5568;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            border: 1px solid #e2e8f0;
+            flex-shrink: 0;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #718096;
+            margin-top: 5px;
+            line-height: 1.2;
+        }
+
+        .warning-box {
+            background: #fef5e7;
+            border: 1px solid #f6ad55;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            color: #744210;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Tablet and larger phones */
+        @media (min-width: 481px) {
+            body {
+                padding: 15px;
+            }
+
+            .calendar-header {
+                padding: 25px 20px;
+            }
+
+            .calendar-title {
+                font-size: 24px;
+            }
+
+            .navigation {
+                padding: 20px;
+            }
+
+            .nav-button span:nth-child(2) {
+                display: inline;
+            }
+
+            .current-view {
+                font-size: 16px;
+            }
+
+            .calendar-body {
+                padding: 20px;
+            }
+
+            .period-grid {
+                gap: 3px;
+            }
+
+            .weekday-header {
+                font-size: 12px;
+                padding: 10px 4px;
+            }
+
+            .calendar-day {
+                min-height: 50px;
+            }
+
+            .calendar-day .day-number {
+                font-size: 16px;
+            }
+
+            .legend {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .calendar-header {
+                padding: 30px;
+            }
+
+            .calendar-title {
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+
+            .navigation {
+                position: static;
+            }
+
+            .calendar-body {
+                padding: 30px;
+                min-height: 500px;
+            }
+
+            .period-grid {
+                gap: 5px;
+            }
+
+            .weekday-header {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .calendar-day .day-number {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h1 class="calendar-title">Kalender Penggajian</h1>
+            <p class="calendar-subtitle">Tahun 2025 - 2026</p>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-button" id="prevBtn" onclick="navigateCalendar(-1)">
+                <span>←</span>
+                <span>Sebelumnya</span>
+            </button>
+            <div class="current-view" id="currentView">Januari 2025</div>
+            <button class="nav-button" id="nextBtn" onclick="navigateCalendar(1)">
+                <span>Selanjutnya</span>
+                <span>→</span>
+            </button>
+        </div>
+        
+        <div class="calendar-body" id="calendarBody">
+            <!-- Calendar content will be inserted here -->
+        </div>
+    </div>
+
+    <script>
         class PayrollCalendar {
             constructor() {
                 this.currentViewIndex = 0;
@@ -120,7 +600,51 @@
                 
                 const calendarBody = document.getElementById('calendarBody');
                 
-                calendarBody.addEventListener('touchstart', (e) =<= 480 ? 
+                calendarBody.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    this.touchStartY = e.changedTouches[0].screenY;
+                    this.isSwipeActive = false;
+                }, { passive: true });
+                
+                calendarBody.addEventListener('touchmove', (e) => {
+                    const touchMoveX = e.changedTouches[0].screenX;
+                    const touchMoveY = e.changedTouches[0].screenY;
+                    
+                    const diffX = Math.abs(touchMoveX - touchStartX);
+                    const diffY = Math.abs(touchMoveY - this.touchStartY);
+                    
+                    // Only activate swipe if horizontal movement is greater than vertical
+                    if (diffX > diffY && diffX > 30) {
+                        this.isSwipeActive = true;
+                    }
+                }, { passive: true });
+                
+                calendarBody.addEventListener('touchend', (e) => {
+                    if (!this.isSwipeActive) return;
+                    
+                    touchEndX = e.changedTouches[0].screenX;
+                    const touchEndY = e.changedTouches[0].screenY;
+                    
+                    const diffX = touchStartX - touchEndX;
+                    const diffY = Math.abs(this.touchStartY - touchEndY);
+                    
+                    // Only trigger swipe if horizontal movement is significantly greater than vertical
+                    if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY * 2) {
+                        if (diffX > 0) {
+                            // Swipe left - next
+                            this.navigate(1);
+                        } else {
+                            // Swipe right - previous
+                            this.navigate(-1);
+                        }
+                    }
+                    
+                    this.isSwipeActive = false;
+                }, { passive: true });
+            }
+
+            getWeekdaysShort() {
+                return window.innerWidth <= 480 ? 
                     ['M', 'S', 'S', 'R', 'K', 'J', 'S'] : 
                     ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
             }
@@ -130,14 +654,14 @@
             }
 
             isWorkingDay(dayOfWeek) {
-                return dayOfWeek>= 0 && dayOfWeek <= 4;
+                return dayOfWeek >= 0 && dayOfWeek <= 4;
             }
 
             calculateWorkingDays(startDate, endDate) {
                 let count = 0;
                 let current = new Date(startDate);
                 
-                while (current<= endDate) {
+                while (current <= endDate) {
                     if (this.isWorkingDay(current.getDay())) {
                         count++;
                     }
@@ -152,19 +676,30 @@
                 const daysInMonth = new Date(year, month + 1, 0).getDate();
                 const firstDay = new Date(year, month, 1).getDay();
                 
-                let html = `<div class="work-schedule-notice"><strong>Jadwal Kerja</strong>
+                let html = `
+                    <div class="work-schedule-notice">
+                        <strong>Jadwal Kerja</strong>
                         Min-Kam: Kerja | Jum-Sab: Libur
-                    </div><div class="payment-date-banner">
+                    </div>
+                    
+                    <div class="payment-date-banner">
                         💰 Pembayaran Gaji: ${this.formatDateShort(paymentDate)}
-                    </div><div class="period-header"><div class="period-title">${this.monthNames[month]} ${year}</div><div class="period-subtitle">Bulan Penuh</div></div>
+                    </div>
+                    
+                    <div class="period-header">
+                        <div class="period-title">${this.monthNames[month]} ${year}</div>
+                        <div class="period-subtitle">Bulan Penuh</div>
+                    </div>
                 `;
                 
                 html += '<div class="period-grid">';
                 
-                this.getWeekdaysShort().forEach((day, index) =<div class="weekday-header ${isWeekendHeader ? 'weekend' : ''}">${day}</div>`;
+                this.getWeekdaysShort().forEach((day, index) => {
+                    const isWeekendHeader = index === 5 || index === 6;
+                    html += `<div class="weekday-header ${isWeekendHeader ? 'weekend' : ''}">${day}</div>`;
                 });
                 
-                for (let i = 0; i <firstDay; i++) {
+                for (let i = 0; i < firstDay; i++) {
                     html += `<div class="calendar-day outside-period"></div>`;
                 }
                 
@@ -180,7 +715,10 @@
                         classes += ' weekend';
                     }
                     
-                    html += `<div class="${classes}"><div class="day-number">${day}</div></div>
+                    html += `
+                        <div class="${classes}">
+                            <div class="day-number">${day}</div>
+                        </div>
                     `;
                 }
                 
@@ -192,7 +730,31 @@
                 );
                 
                 html += `
-                    <div class="stats-row"><div class="stat-card"><div class="stat-value">${daysInMonth}</div><div class="stat-label">Total Hari</div></div><div class="stat-card"><div class="stat-value">${workingDays}</div><div class="stat-label">Hari Kerja</div></div><div class="stat-card"><div class="stat-value">${paymentDate.getDate()}</div><div class="stat-label">Tgl Bayar</div></div></div><div class="info-panel"><div class="info-title"><span>📋</span><span>Informasi</span></div><div class="info-item"><div class="info-icon">💰</div><div>Gaji bulan ${this.monthNames[month]} dibayar tanggal ${paymentDate.getDate()} ${this.monthNames[paymentDate.getMonth()]} ${paymentDate.getFullYear()}</div></div></div>
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <div class="stat-value">${daysInMonth}</div>
+                            <div class="stat-label">Total Hari</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${workingDays}</div>
+                            <div class="stat-label">Hari Kerja</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${paymentDate.getDate()}</div>
+                            <div class="stat-label">Tgl Bayar</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-panel">
+                        <div class="info-title">
+                            <span>📋</span>
+                            <span>Informasi</span>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">💰</div>
+                            <div>Gaji bulan ${this.monthNames[month]} dibayar tanggal ${paymentDate.getDate()} ${this.monthNames[paymentDate.getMonth()]} ${paymentDate.getFullYear()}</div>
+                        </div>
+                    </div>
                 `;
                 
                 return html;
@@ -203,18 +765,26 @@
                 const endDate = new Date(2025, 2, 19);
                 
                 let html = `
-                    <div class="work-schedule-notice"><strong>Jadwal Kerja</strong>
+                    <div class="work-schedule-notice">
+                        <strong>Jadwal Kerja</strong>
                         Min-Kam: Kerja | Jum-Sab: Libur
-                    </div><div class="period-header"><div class="period-title">Periode Khusus</div><div class="period-subtitle">1 - 19 Maret 2025</div></div>
+                    </div>
+                    
+                    <div class="period-header">
+                        <div class="period-title">Periode Khusus</div>
+                        <div class="period-subtitle">1 - 19 Maret 2025</div>
+                    </div>
                 `;
                 
                 html += '<div class="period-grid">';
                 
-                this.getWeekdaysShort().forEach((day, index) =<div class="weekday-header ${isWeekendHeader ? 'weekend' : ''}">${day}</div>`;
+                this.getWeekdaysShort().forEach((day, index) => {
+                    const isWeekendHeader = index === 5 || index === 6;
+                    html += `<div class="weekday-header ${isWeekendHeader ? 'weekend' : ''}">${day}</div>`;
                 });
                 
                 const firstDay = startDate.getDay();
-                for (let i = 0; i <firstDay; i++) {
+                for (let i = 0; i < firstDay; i++) {
                     html += `<div class="calendar-day outside-period"></div>`;
                 }
                 
@@ -231,7 +801,11 @@
                         classes += ' weekend';
                     }
                     
-                    html += `<div class="${classes}"><div class="day-number">${day}</div><div class="day-month">Mar</div></div>
+                    html += `
+                        <div class="${classes}">
+                            <div class="day-number">${day}</div>
+                            <div class="day-month">Mar</div>
+                        </div>
                     `;
                 }
                 
@@ -240,7 +814,31 @@
                 const workingDays = this.calculateWorkingDays(startDate, endDate);
                 
                 html += `
-                    <div class="stats-row"><div class="stat-card"><div class="stat-value">19</div><div class="stat-label">Total Hari</div></div><div class="stat-card"><div class="stat-value">${workingDays}</div><div class="stat-label">Hari Kerja</div></div></div><div class="info-panel"><div class="info-title"><span>📋</span><span>Info Khusus</span></div><div class="info-item"><div class="info-icon">📊</div><div>Pemberlakuan sistem pembukuan yang baru</div></div><div class="info-item"><div class="info-icon">💰</div><div>Gaji dibayar akhir bulan disertai THR</div></div></div>
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <div class="stat-value">19</div>
+                            <div class="stat-label">Total Hari</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${workingDays}</div>
+                            <div class="stat-label">Hari Kerja</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-panel">
+                        <div class="info-title">
+                            <span>📋</span>
+                            <span>Info Khusus</span>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📊</div>
+                            <div>Pemberlakuan sistem pembukuan yang baru</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">💰</div>
+                            <div>Gaji dibayar akhir bulan disertai THR</div>
+                        </div>
+                    </div>
                 `;
                 
                 return html;
@@ -252,7 +850,8 @@
                 const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
                 
                 let html = `
-                    <div class="work-schedule-notice"><strong>Jadwal Kerja</strong>
+                    <div class="work-schedule-notice">
+                        <strong>Jadwal Kerja</strong>
                         Min-Kam: Kerja | Jum-Sab: Libur
                     </div>
                 `;
@@ -269,16 +868,21 @@
                 }
 
                 html += `
-                    <div class="period-header"><div class="period-title">Periode Penggajian</div><div class="period-subtitle">${this.formatDateShort(startDate)} - ${this.formatDateShort(endDate)}</div></div>
+                    <div class="period-header">
+                        <div class="period-title">Periode Penggajian</div>
+                        <div class="period-subtitle">${this.formatDateShort(startDate)} - ${this.formatDateShort(endDate)}</div>
+                    </div>
                 `;
                 
                 html += '<div class="period-grid">';
                 
-                this.getWeekdaysShort().forEach((day, index) =<div class="weekday-header ${isWeekendHeader ? 'weekend' : ''}">${day}</div>`;
+                this.getWeekdaysShort().forEach((day, index) => {
+                    const isWeekendHeader = index === 5 || index === 6;
+                    html += `<div class="weekday-header ${isWeekendHeader ? 'weekend' : ''}">${day}</div>`;
                 });
                 
                 const firstDay = startDate.getDay();
-                for (let i = 0; i <firstDay; i++) {
+                for (let i = 0; i < firstDay; i++) {
                     html += `<div class="calendar-day outside-period"></div>`;
                 }
                 
@@ -304,7 +908,11 @@
                         classes += ' weekend';
                     }
                     
-                    html += `<div class="${classes}"><div class="day-number">${day}</div><div class="day-month">${this.monthNames[month].substring(0, 3)}</div></div>
+                    html += `
+                        <div class="${classes}">
+                            <div class="day-number">${day}</div>
+                            <div class="day-month">${this.monthNames[month].substring(0, 3)}</div>
+                        </div>
                     `;
                     
                     current.setDate(current.getDate() + 1);
@@ -313,33 +921,58 @@
                 
                 const totalCells = firstDay + dayCount;
                 const remainingCells = (7 - (totalCells % 7)) % 7;
-                for (let i = 0; i <remainingCells; i++) {
+                for (let i = 0; i < remainingCells; i++) {
                     html += `<div class="calendar-day outside-period"></div>`;
                 }
                 
                 html += '</div>';
                 
                 html += `
-                    <div class="stats-row"><div class="stat-card"><div class="stat-value">${totalDays}</div><div class="stat-label">Total Hari</div></div><div class="stat-card"><div class="stat-value">${workingDays}</div><div class="stat-label">Hari Kerja</div></div>
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <div class="stat-value">${totalDays}</div>
+                            <div class="stat-label">Total Hari</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${workingDays}</div>
+                            <div class="stat-label">Hari Kerja</div>
+                        </div>
                         ${paymentDate ? `
-                        <div class="stat-card"><div class="stat-value">${paymentDate.getDate()}</div><div class="stat-label">${this.monthNames[paymentDate.getMonth()].substring(0, 3)}</div></div>
+                        <div class="stat-card">
+                            <div class="stat-value">${paymentDate.getDate()}</div>
+                            <div class="stat-label">${this.monthNames[paymentDate.getMonth()].substring(0, 3)}</div>
+                        </div>
                         ` : ''}
                     </div>
                 `;
                 
                 html += `
-                    <div class="info-panel"><div class="info-title"><span>📋</span><span>Informasi Periode</span></div><div class="info-item"><div class="info-icon">📅</div><div>Periode: ${this.formatDateShort(startDate)} - ${this.formatDateShort(endDate)}</div></div>
+                    <div class="info-panel">
+                        <div class="info-title">
+                            <span>📋</span>
+                            <span>Informasi Periode</span>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📅</div>
+                            <div>Periode: ${this.formatDateShort(startDate)} - ${this.formatDateShort(endDate)}</div>
+                        </div>
                 `;
 
                 if (paymentDate) {
                     html += `
-                        <div class="info-item"><div class="info-icon">💰</div><div>Dibayar: ${this.formatDateShort(paymentDate)}</div></div>
+                        <div class="info-item">
+                            <div class="info-icon">💰</div>
+                            <div>Dibayar: ${this.formatDateShort(paymentDate)}</div>
+                        </div>
                     `;
                 }
 
                 if (hasCompensation) {
                     html += `
-                        <div class="info-item"><div class="info-icon">🎁</div><div>Termasuk uang kompensasi</div></div>
+                        <div class="info-item">
+                            <div class="info-icon">🎁</div>
+                            <div>Termasuk uang kompensasi</div>
+                        </div>
                     `;
                 }
 
@@ -347,7 +980,8 @@
 
                 if (hasContractNote) {
                     html += `
-                        <div class="warning-box"><strong>⚠️ Catatan:</strong>
+                        <div class="warning-box">
+                            <strong>⚠️ Catatan:</strong>
                             • Kontrak lanjut: Gaji penuh 20 Nov-19 Des<br>
                             • Kontrak selesai: Gaji 20-30 Nov saja<br>
                             • Dibayar: 31 Des 2025
@@ -356,7 +990,24 @@
                 }
                 
                 html += `
-                    <div class="legend"><div class="legend-item"><div class="legend-color" style="background: #ebf8ff; border: 2px solid #4299e1;"></div><span>Awal</span></div><div class="legend-item"><div class="legend-color" style="background: #fff5f5; border: 2px solid #fc8181;"></div><span>Akhir</span></div><div class="legend-item"><div class="legend-color" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);"></div><span>Bayar</span></div><div class="legend-item"><div class="legend-color" style="background: #fef2f2;"></div><span>Libur</span></div></div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ebf8ff; border: 2px solid #4299e1;"></div>
+                            <span>Awal</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #fff5f5; border: 2px solid #fc8181;"></div>
+                            <span>Akhir</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);"></div>
+                            <span>Bayar</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #fef2f2;"></div>
+                            <span>Libur</span>
+                        </div>
+                    </div>
                 `;
                 
                 return html;
@@ -400,7 +1051,7 @@
 
             navigate(direction) {
                 const newIndex = this.currentViewIndex + direction;
-                if (newIndex>= 0 && newIndex <this.views.length) {
+                if (newIndex >= 0 && newIndex < this.views.length) {
                     this.currentViewIndex = newIndex;
                     this.render();
                     // Scroll to top of calendar container, not window
@@ -421,4 +1072,6 @@
                 calendar.navigate(direction);
             }
         }
-    </script></body></html>
+    </script>
+</body>
+</html>
